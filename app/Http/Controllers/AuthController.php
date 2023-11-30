@@ -89,4 +89,10 @@ class AuthController extends Controller
             return redirect()->route('admin.home');
         } else return redirect()->back()->withInput()->withErrors(['err' => 'Thông tin đăng nhập không chính xác.']);
     }
+
+    public function logout()
+    {
+        Auth::guard('users')->logout();
+        return redirect()->route('auth');
+    }
 }

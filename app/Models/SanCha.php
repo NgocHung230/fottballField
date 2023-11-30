@@ -38,4 +38,8 @@ class SanCha extends Model
     {
         return DB::select('SELECT san_chas.* FROM san_chas where san_chas.id = ?', $data);
     }
+
+    public function deleteByIdUser($data){
+        DB::delete('DELETE from san_chas where quanly = ?', $data);
+    }
 }

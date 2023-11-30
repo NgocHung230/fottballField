@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('diachi');
             $table->string('sdt');
             $table->string('quanly');
-            // $table->foreign('quanly')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

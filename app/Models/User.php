@@ -46,4 +46,8 @@ class User extends Authenticatable
     public function updateById($data){
         DB::update('UPDATE users SET hoten = ? , email = ? , role = ? where id = ?', $data);
     }
+
+    public function updatePass($data){
+        DB::update('UPDATE users SET password = ?  where id = ?', $data);
+    }
 }

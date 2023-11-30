@@ -1,0 +1,110 @@
+*
+{
+    margin: 0;
+    padding: 0;
+}
+html,body
+{   
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    overflow-y: auto;
+}
+.navbar
+{
+    background-color: rgb(47, 94, 47);
+}
+.navbar img
+{
+    width:100%;
+    height: 40px;
+}
+.nav-middle 
+{   
+    display: flex;
+    text-align: center;
+    gap: 50px;
+}
+.nav-middle i
+{
+    font-size: 30px;
+    color: white; 
+}
+.user
+{
+    position: relative;
+}
+.avatar 
+{   
+    width: 50px;
+    height: 50px;
+    background: white;
+    clip-path: circle(50%);
+    text-align: center;
+    margin-right: 20px;
+}
+.avatar i
+{
+    font-size: 30px;
+    margin-top: 20%;
+    color: rgb(47, 94, 47);
+}
+.avatar:hover i
+{
+    cursor: pointer;
+    color: rgb(26, 20, 13);
+}
+.user:hover .sign
+{
+    visibility: visible;
+}
+.sign
+{   
+    position: absolute;
+    width: 90px;
+    height: auto;
+    /* margin-top: 5px; */
+    margin-bottom: -140px;
+    visibility: hidden;
+    margin-left: 40px;
+}
+.sign a
+{
+    width: 100px;
+    height: auto;
+    display: block;
+    text-decoration: none;
+    color: white ;
+    padding: 5px 10px;
+    background-color: rgb(47, 94, 47);
+}
+.sign a:hover
+{
+    color: black;
+}
+.layout
+{
+    width: 100%;
+    height: 90%;
+    margin-top: 65px;
+    position: relative;
+}
+.fa-brands
+{   
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    color: blue ;
+    font-size: 50px;
+    left: 40px;
+    bottom: 40px;
+    display: fixed;
+    overflow-x: 5s;
+    animation: facebook 2s infinite;
+}
+@keyframes facebook
+{   
+    0%{transform: scale(0.9);}
+    50%{transform: scale(1);}
+    100%{transform: scale(0.9);}
+}

@@ -27,5 +27,6 @@ class DatSan extends Model
     public function createDatSan($data)
     {
         DB::insert('INSERT into dat_sans (idsanbong, iduser, khunggio, ngay, giatien, idsancha) values (?, ?, ?, ?, ?, ?)', $data);
+        return DB::select('SELECT id from dat_sans where idsanbong = ? and iduser=? and khunggio=? and ngay=? and giatien=? and idsancha=?', $data);
     }
 }

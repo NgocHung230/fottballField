@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\DatSan;
+use App\Models\ThongBao;
+use App\Models\ThongKe;
 use Illuminate\Http\Request;
 
 class DatSanController extends Controller
@@ -29,7 +31,43 @@ class DatSanController extends Controller
             $request->giatien,
             $request->idsancha
         ];
-        $datsan->createDatSan($dataInsert);
+        $ds = $datsan->createDatSan($dataInsert);
+
+        $thongbao = new ThongBao();
+        $thongbao->createThongBao([$request->idsancha,$request->iduser,$ds[0]->id,now()]);
+        $ngay = explode('-',$request->ngay);
+        $dataCheck = [
+            $request->idsancha,
+            $ngay[0],
+            $ngay[1],
+            $ngay[2]
+        ];
+        $TK = new ThongKe();
+        $check = $TK->getThongKeByIdSanCha($dataCheck);
+        if ($check)
+        {
+            $tmp = $check[0]->doanhso;
+            $doanhso = (int)$tmp + (int)$request->giatien;
+            $dataUpdate = [
+                $doanhso,
+                $request->idsancha,
+                $ngay[0],
+                $ngay[1],
+                $ngay[2]
+            ];
+            $TK->updateThongKe($dataUpdate);
+        }
+        else{
+            $dataInsert = [
+                $request->idsancha,
+                $ngay[0],
+                $ngay[1],
+                $ngay[2],
+                $request->giatien
+            ];
+            $TK->addThongKe($dataInsert);
+        }
+        
         return redirect()->route('user.datsan',['id'=>$request->idsancha,'day'=>$request->ngay]);
     }
 

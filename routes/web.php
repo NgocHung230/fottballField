@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BanggiaController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\DatSanController;
+use App\Http\Controllers\ErrorController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ImgSanChaController;
 use App\Http\Controllers\SanBongController;
@@ -22,28 +23,32 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/',[HomeController::class,'index'])->name('index');
+Route::get('/logout',[AuthController::class,'logout'])->name('logout');
 
-Route::get('/auth',[AuthController::class,'index'])->name('auth');
-Route::post('/auth-register',[AuthController::class,'register'])->name('register');
-Route::post('/auth-login',[AuthController::class,'login'])->name('login');
-
-
-Route::prefix('users')->name('users.')->group(function (){
-    
+Route::middleware('isLogin')->prefix('')->group(function() {
+    Route::get('/',[HomeController::class,'index'])->name('index');
+    Route::get('/auth',[AuthController::class,'index'])->name('auth');
+    Route::post('/auth-register',[AuthController::class,'register'])->name('register');
+    Route::post('/auth-login',[AuthController::class,'login'])->name('login');
 });
 
-Route::prefix('admin')->name('admin.')->group(function (){
+Route::middleware('admin.checkLogin')->prefix('admin')->name('admin.')->group(function (){
     Route::get('/',[AdminController::class,'index'])->name('home');
     Route::get('/quanly',[AdminController::class,'quanly'])->name('quanly');
     Route::get('/edit',[AdminController::class,'edit'])->name('edit');
     Route::post('/edit',[AdminController::class,'edit'])->name('edit');
     Route::put('/update',[AdminController::class,'update'])->name('update');
     Route::delete('/xoa',[AdminController::class,'destroy'])->name('destroy');
+    Route::get('/profile',[AdminController::class,'profile'])->name('profile');
+    Route::post('/profile_edit',[AdminController::class,'profile_edit'])->name('profile_edit');
+    Route::post('/password_update',[AdminController::class,'password_update'])->name('password_update');
+    Route::get('/datsan',[AdminController::class,'DatSanFun'])->name('datsan');
+    Route::get('/datsan/{id}/{day}',[AdminController::class,'DatSanFun'])->name('datsan');
+    Route::post('/datsan',[AdminController::class,'DatSanFun'])->name('datsanPost');
     
 });
 
-Route::prefix('client')->name('client.')->group(function (){
+Route::middleware('client.checkLogin')->prefix('client')->name('client.')->group(function (){
     Route::get('/',[ClientController::class,'index'])->name('home');
     Route::get('/quanlysanbong',[ClientController::class,'quanlysanbong'])->name('quanly');
     Route::post('/quanlysanbong',[ClientController::class,'quanlysanbongwithdb'])->name('quanlywithdb');
@@ -52,15 +57,31 @@ Route::prefix('client')->name('client.')->group(function (){
     Route::post('/edit',[ClientController::class,'edit'])->name('editpost');
     Route::post('/update',[ClientController::class,'update'])->name('update');
     Route::delete('/destroy',[ClientController::class,'destroy'])->name('destroy');
+    Route::get('/thongke',[ClientController::class,'thongke'])->name('thongke');
+    Route::post('/thongke',[ClientController::class,'thongkepost'])->name('thongkepost');
+    Route::get('/thongbao',[ClientController::class,'thongbao'])->name('thongbao');
+    Route::get('/datsan',[ClientController::class,'DatSanFun'])->name('datsan');
+    Route::get('/datsan/{id}/{day}',[ClientController::class,'DatSanFun'])->name('datsan');
+    Route::post('/datsan',[ClientController::class,'DatSanFun'])->name('datsanPost');
+    Route::get('/profile',[ClientController::class,'profile'])->name('profile');
+    Route::post('/profile_edit',[ClientController::class,'profile_edit'])->name('profile_edit');
+    Route::post('/password_update',[ClientController::class,'password_update'])->name('password_update');
+
+
     
     
 });
 
-Route::prefix('user')->name('user.')->group(function (){
+Route::middleware('user.checkLogin')->prefix('user')->name('user.')->group(function (){
     Route::get('/',[UserController::class,'index'])->name('home');
     Route::get('/datsan',[UserController::class,'DatSanFun'])->name('datsan');
     Route::get('/datsan/{id}/{day}',[UserController::class,'DatSanFun'])->name('datsan');
     Route::post('/datsan',[UserController::class,'DatSanFun'])->name('datsanPost');
+    Route::get('/thongbao',[UserController::class,'thongbao'])->name('thongbao');
+    Route::get('/profile',[UserController::class,'profile'])->name('profile');
+    Route::post('/profile_edit',[UserController::class,'profile_edit'])->name('profile_edit');
+    Route::post('/password_update',[UserController::class,'password_update'])->name('password_update');
+
     
     
 });
@@ -93,6 +114,8 @@ Route::prefix('datsan')->name('datsan.')->group(function (){
     
     
 });
+
+Route::get('/error',[ErrorController::class,'index'])->name('error');
 
 
 
