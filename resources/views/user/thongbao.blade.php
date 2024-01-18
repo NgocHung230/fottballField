@@ -47,13 +47,18 @@
                 </div>
             </div>
             @if (Auth::guard('users')->check())
-                <div class="dangnhap">
+            <div class="flex-col ">
+                <div class="dangnhap h-8">
                     <p>Xin chào {{ Auth::guard('users')->user()->hoten }}</p>
                     <a href="{{route('logout')}}">
                         <i class="fa-sharp fa-solid fa-right-from-bracket"></i>
                     </a>
-                    
                 </div>
+                <div class="text-center text-white text-xl ">
+                    <p>{{ Auth::guard('users')->user()->acount }}$</p>
+    
+                </div>
+            </div>
             @else
             <div class="user">
                 <div class="avatar ml-5">
@@ -79,15 +84,47 @@
         <div class="w-8/12 mx-auto">
             @foreach ($data as $key)
                 <div>
-                    <div class="  mt-4 bg-blue-100 border border-blue-400 text-blue-700 px-4 py-2 rounded-md">
+                    @if ($key->updated_at == null)
+                            <?php
+                            date_default_timezone_set('Asia/Ho_Chi_Minh');
+                            $dayCheck = now();
+                            $modifiedDateTime = clone $dayCheck;
+                            $modifiedDateTime->modify('-1 hour');   
+                            
+                            ?>
+                            <div class="  mt-4 bg-blue-100 border border-blue-400 text-blue-700 px-4 py-2 rounded-md">
+                            <i class="fa-solid fa-bullhorn"></i>
+
+                            Bạn đã đặt sân thành công {{ $key->tensancon }} - {{ $key->loaisan }} tại sân bóng
+                            {{ $key->tensancha }},
+                            địa chỉ {{ $key->diachi }} vào {{ $key->khunggio }}h-{{ $key->khunggio + 1 }}h ngày
+                            {{ $key->ngay }} với giá tiền {{ $key->giatien }}$.
+                            @if (Auth::guard('users')->user()->id==$key->iduser&&$key->updated_at==null&&$modifiedDateTime < DateTime::createFromFormat('Y-m-d H:i:s', $key->created_at))
+                                <form action="" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="id" value="{{$key->id}}">
+                                    <input type="hidden" name="iddatsan" value="{{$key->iddatsan}}">
+                                    <input type="hidden" name="idsancha" value="{{$key->idsancha}}">
+                                    <input type="hidden" name="giatien" value="{{$key->giatien}}">
+                                    <input type="hidden" name="ngay" value="{{$key->ngay}}">
+                                    <button type="submit" style="color: red">Huỷ sân</button>
+                                </form>
+                            @endif
+
+                        </div>
+                        <label for="">{{$key->created_at}}</label>
+                    @else
+                        
+                        <div class="  mt-4 bg-blue-100 border border-blue-400 text-red-700 px-4 py-2 rounded-md">
                         <i class="fa-solid fa-bullhorn"></i>
 
-                        Bạn đã đặt sân thành công {{ $key->tensancon }} - {{ $key->loaisan }} tại sân bóng
-                        {{ $key->tensancha }},
-                        địa chỉ {{ $key->diachi }} vào {{ $key->khunggio }}h-{{ $key->khunggio + 1 }}h ngày
-                        {{ $key->ngay }} với giá tiền {{ $key->giatien }}$.
+                        BẠN ĐÃ HUỶ SÂN THÀNH CÔNG !!
 
-                    </div>
+                        </div>
+                    <label for="">{{$key->updated_at}}</label>
+
+                    @endif
+                    
 
                 </div>
             @endforeach

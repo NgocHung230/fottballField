@@ -78,6 +78,7 @@ Route::middleware('user.checkLogin')->prefix('user')->name('user.')->group(funct
     Route::get('/datsan/{id}/{day}',[UserController::class,'DatSanFun'])->name('datsan');
     Route::post('/datsan',[UserController::class,'DatSanFun'])->name('datsanPost');
     Route::get('/thongbao',[UserController::class,'thongbao'])->name('thongbao');
+    Route::post('/thongbao',[UserController::class,'thongbaoPost'])->name('thongbaoPost');
     Route::get('/profile',[UserController::class,'profile'])->name('profile');
     Route::post('/profile_edit',[UserController::class,'profile_edit'])->name('profile_edit');
     Route::post('/password_update',[UserController::class,'password_update'])->name('password_update');

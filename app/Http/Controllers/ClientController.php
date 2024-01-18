@@ -206,7 +206,9 @@ class ClientController extends Controller
         $SC = new SanCha();
         $SanCha = $SC->findSanChaByIdUser([Auth::guard('users')->user()->id]);
         $ngay = date('d-m-Y');
+        // dd($ngay);
         $day = explode('-',$ngay);
+        // dd($day);
         $TK = new ThongKe();
         $theongay = [
             $SanCha[0]->id,
@@ -217,12 +219,13 @@ class ClientController extends Controller
         $dataNgay = $TK->getThongKeNgayHienTai($theongay);
         $theothang = [
             $SanCha[0]->id,
-            $day[1],
-            $day[2],
-            $day[0]
+            $day[2]
         ];
-        $dataThang = $TK->getThongKeThangHienTai($theothang);
+        $dataThang = $TK->getThongKeThang($theothang);
+        // dd($day[0]);
+
         // dd($dataThang);
+        // dd($dataNgay);
         return view('client/thongke',['dataNgay'=>$dataNgay, 'dataThang'=>$dataThang,'thang'=>$day[1],'nam'=>$day[2]]);
     }
 
@@ -260,9 +263,10 @@ class ClientController extends Controller
         {
             $theothang = [
                 $SanCha[0]->id,
-                $day[1],
                 $day[2],
-                $day[0]
+                $day[1],
+                $day[0],
+                $day[1]
             ];
             $dataThang = $TK->getThongKeThangHienTai($theothang);
         }
@@ -274,7 +278,6 @@ class ClientController extends Controller
             ];
             $dataThang = $TK->getThongKeThang($theothang);
         }
-        
         // dd($request->nam);
         // dd($dataThang);
         // dd($dataNgay);
@@ -284,6 +287,7 @@ class ClientController extends Controller
 
     public function thongbao()
     {
+        // dd(date('H:m'));
         $thongbao = new ThongBao();
         $SanCha = new SanCha();
         $id = $SanCha->findSanChaByIdUser([Auth::guard('users')->user()->id]);

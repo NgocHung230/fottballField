@@ -118,16 +118,16 @@
             for ($i=1; $i <=31 ; $i++) { 
                 array_push($labelThang,$i);
                 $kt=0;
-                foreach ($dataNgay as $key => $value) {
+                foreach ($dataNgay as $key) {
                     if ($key->ngay == $i)
                     {
-                        array_push($dtThang,(int)$key->doanhso);
+                        array_push($dtThang,$key->doanhso);
                         $kt=1;
                         break;
                     }
                 }
                 if ($kt==0)
-                    array_push($dtThang,0);
+                    array_push($dtThang,(int)0);
             }
                 break;
             case '4':

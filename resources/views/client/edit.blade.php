@@ -26,25 +26,27 @@
     <style>
         /* CSS để hiển thị danh sách ngang */
         ul.horizontal-list {
-          list-style: none;
-          padding: 0;
-          margin: 0;
-          display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
         }
-      </style>
-    
+    </style>
+
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <script src="/slick_slide.js"></script>
     <!-- Link slick-slide -->
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
-    
+
     <!-- Link css -->
     <link rel="stylesheet" href="/slick_slide.css">
 
     <!-- Link icon -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-Avb2QiuDEEvB4bZJYdft2mNjVShBftLdPG8FJ0V7irTLQ8Uo0qcPxh4Plq7G5tGm0rU+1SPhVotteLpBERwTkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+        integrity="sha512-Avb2QiuDEEvB4bZJYdft2mNjVShBftLdPG8FJ0V7irTLQ8Uo0qcPxh4Plq7G5tGm0rU+1SPhVotteLpBERwTkw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 
 </head>
@@ -58,8 +60,8 @@
         </div>
         <div class="collapse navbar-collapse " id="collapsibleNavId">
             <div class="nav-middle ml-auto mr-auto">
-                <a href="{{ route('client.home') }}" >
-                    <i class="fa-solid fa-house" ></i>
+                <a href="{{ route('client.home') }}">
+                    <i class="fa-solid fa-house"></i>
                 </a>
                 <a href="{{ route('client.quanly') }}">
                     <i class="fa-solid fa-list" style="color: black"></i>
@@ -73,7 +75,7 @@
                 <a href="{{ route('client.profile') }}">
                     <i class="fa-solid fa-user-pen"></i>
                 </a>
-                
+
             </div>
             {{-- <ul class="navbar-nav ml-auto mr-auto mt-2 mt-lg-0 text-justify">
                 <li class="nav-item active ">
@@ -112,240 +114,252 @@
 
 
     </nav>
+    <h1 class="h-36">em yêu</h1>
+
     <!-- thong tin san   -->
     <div class="form-anh">
         {{-- them anh  --}}
-        <div class="form-thong-tin ml-5 flex justify-center items-center h-full  w-full ">
+        <div class="form-thong-tin flex justify-center items-center h-full  w-full ">
             <div class="w-full max-w-screen-lg">
-                <div class="grid grid-cols-2 gap-4">
-                    <div class="col-span-1 w-full-2/3 ">
-                        <div class="w-full border-4 rounded-xl bg-gray-200">
-                            @if (session()->has('data'))
-                                <?php $data = session('data'); ?>
-                                <div class="border-2 rounded-xl bg-gray-300 w-full mx-auto ">
-                                    <div class="form-thong-tin ml-5 flex justify-center items-center h-full mb-12">
-                                        <div class="w-full">
-                                            <form action="{{ route('client.update') }}" method="POST"
-                                                class="max-w-md mx-auto mt-8 items-center justify-center flex-col w-full ">
-                                                <div class="mb-4 flex items-center">
-                                                    <label for="tensan"
-                                                        class="text-gray-700 text-sm font-bold mr-2 w-2/12">Tên
-                                                        sân:</label>
-                                                    <input type="text" name="tensan" id="tensan"
-                                                        placeholder="Nhập tên sân" value="{{ $data->tensan }}"
-                                                        class="w-full p-2  border border-gray-300 rounded focus:outline-none focus:border-blue-500">
-                                                </div>
-                                                <div class="mb-4 flex items-center">
-                                                    <label for="diachi"
-                                                        class="text-gray-700 text-sm font-bold mr-2  w-2/12">Địa
-                                                        chỉ:</label>
-                                                    <input type="text" name="diachi" id="diachi"
-                                                        placeholder="Nhập địa chỉ sân" value="{{ $data->diachi }}"
-                                                        class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500">
-                                                </div>
+                <div class=" w-full  ">
+                    <div class="w-8/12 mx-auto border-4 rounded-xl bg-gray-200">
+                        @if (session()->has('data'))
+                            <?php $data = session('data'); ?>
+                            <div class="border-2 rounded-xl bg-gray-100 w-full mx-auto ">
+                                <div class="form-thong-tin ml-5 flex justify-center items-center h-full mb-12">
+                                    <div class="w-full">
+                                        <form action="{{ route('client.update') }}" method="POST"
+                                            class="max-w-md mx-auto mt-8 items-center justify-center flex-col w-full ">
+                                            <div class="mb-4 flex items-center">
+                                                <label for="tensan"
+                                                    class="text-gray-700 text-sm font-bold mr-2  text-xl w-3/12">Tên
+                                                    sân:</label>
+                                                <input type="text" name="tensan" id="tensan"
+                                                    placeholder="Nhập tên sân" value="{{ $data->tensan }}"
+                                                    class="w-full p-2  rounded ">
+                                            </div>
+                                            <div class="mb-4 flex items-center">
+                                                <label for="diachi"
+                                                    class="text-gray-700 text-sm font-bold mr-2 text-xl   w-3/12">Địa
+                                                    chỉ:</label>
+                                                <input type="text" name="diachi" id="diachi"
+                                                    placeholder="Nhập địa chỉ sân" value="{{ $data->diachi }}"
+                                                    class="w-full p-2  rounded  ">
+                                            </div>
 
-                                                <div class="mb-4 flex items-center">
-                                                    <label for="sdt"
-                                                        class="text-gray-700 text-sm font-bold mr-2 w-2/12">SĐT:</label>
-                                                    <input type="text" name="sdt" id="sdt"
-                                                        placeholder="Nhập số điện thoại sân" value="{{ $data->sdt }}"
-                                                        class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500">
-                                                </div>
+                                            <div class="mb-4 flex items-center">
+                                                <label for="sdt"
+                                                    class="text-gray-700 text-sm font-bold mr-2 text-xl  w-3/12">SĐT:</label>
+                                                <input type="text" name="sdt" id="sdt"
+                                                    placeholder="Nhập số điện thoại sân" value="{{ $data->sdt }}"
+                                                    class="w-full p-2 rounded ">
+                                            </div>
 
-                                                <div class="justify-center items-center flex">
-                                                    <button type="submit"
-                                                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue mx-auto ">
-                                                        Cập nhật
-                                                    </button>
+                                            <div class="justify-center items-center flex">
+                                                <button type="submit"
+                                                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue mx-auto ">
+                                                    Cập nhật
+                                                </button>
 
-                                                </div>
+                                            </div>
 
-                                                @csrf
-                                            </form>
-                                        </div>
+                                            @csrf
+                                        </form>
                                     </div>
                                 </div>
-                            @endif
-                        </div>
-                    </div>
-                    <div class="col-span-1 w-full-1/3">
-                        <div class="w-full ">
-                            <div class="border-2 mx-auto rounded-xl border-gray-500">
-                                <p
-                                    class="mx-auto justify-center items-center flex font-bold bg-green-300 border-2 rounded-xl">
-                                    HÌNH
-                                    ẢNH</p>
-                                <form action="{{ route('hinhanh.upload') }}" method="POST"
-                                    enctype="multipart/form-data">
-                                    @csrf
-                                    <input type="file" name="image" id="img">
-                                    <input type="hidden" name="idsan" value="{{ $data->id }}">
-                                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                                        type="submit" id="btnupload">Upload</button>
-                                </form>
-
                             </div>
+                        @endif
+                    </div>
+                </div>
+                {{-- them hinh anh  --}}
+                <div class=" w-6/12 mx-auto h-24 mt-2 mb-2">
+                    <div class="w-full ">
+                        <div class="border-2 mx-auto rounded-xl border-gray-500 ">
+                            <p class="mx-auto text-center font-bold bg-green-300 border-2 rounded-xl">
+                                HÌNH
+                                ẢNH</p>
+                            <form action="{{ route('hinhanh.upload') }}" method="POST"
+                                enctype="multipart/form-data" class="text-center">
+                                @csrf
+                                <input type="file" name="image" id="img">
+                                <input type="hidden" name="idsan" value="{{ $data->id }}">
+                                <button
+                                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-2"
+                                    type="submit" id="btnupload">Upload</button>
+                            </form>
+
                         </div>
                     </div>
-                    <!-- Phần 2 chiếm 2/3 chiều rộng của hàng -->
-
                 </div>
+
             </div>
         </div>
-        
+
         {{-- show anh  --}}
         <div class="image-slider">
             @if (session()->has('img'))
                 <?php
-                    $img = session()->get('img');
+                $img = session()->get('img');
                 ?>
                 @foreach ($img as $key)
-                <div class="image-item">
-                    <div class="image">
-                        <img src="{{$key->duongdan}}"
-                            alt="">
+                    <div class="image-item">
+                        <div class="image">
+                            <img src="{{ $key->duongdan }}" alt="">
+                        </div>
+                        <form action="{{ route('client.destroy') }}" method="POST" id="deleteForm">
+                            @csrf
+                            @method('DELETE')
+                            <input type="hidden" name="idimg" value="{{ $key->id }}">
+
+                            <button
+                                class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-xl mb-2 mt-2"
+                                type="button" onclick="confirmDelete()"><i class=" fa-solid fa-trash"></i></button>
+
+
+                        </form>
+                        <script>
+                            function confirmDelete() {
+                                if (confirm('Bạn có chắc chắn muốn xoá?')) {
+                                    event.preventDefault();
+                                    document.getElementById('deleteForm').submit();
+                                }
+                            }
+                        </script>
+                        
+
+
+                        <!-- end thong tin san  -->
+
                     </div>
-                    <form action="{{route('client.destroy')}}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <input type="hidden" name="idimg" value="{{$key->id}}">
-                        <button class="xoa" type="submit">Xóa</button>
-                    </form>
-                </div>
                 @endforeach
             @endif
-            
-            
-    
+
         </div>
 
-      
-    <!-- end thong tin san  -->
-
-    
+        
 
 
-    <!-- them san moi  -->
-    <div class="border-2 rounded-xl mx-auto w-5/12 mb-8 mt-8">
-        <p class="text-center border-2 font-bold bg-green-300 rounded-xl">Thêm mới sân</p>
-        <p>
-        <div class="justify-center items-center flex">
-            <form action="{{ route('sanbong.create') }}" method="POST">
-                <label class="font-bold" for="">Tên sân: </label>
-                <input class="border-2" name="tensan" type="text" placeholder="Nhập tên sân">
-                <label class="font-bold" for="">Loại sân: </label>
-                <select class="border-2" name="loaisan" id="" class="form-select">
+        <!-- them san moi  -->
+        <div class="border-2 rounded-xl mx-auto w-5/12 mb-8 mt-8">
+            <p class="text-center border-2 font-bold bg-green-300 rounded-xl">Thêm mới sân</p>
+            <p>
+            <div class="justify-center items-center flex">
+                <form action="{{ route('sanbong.create') }}" method="POST">
+                    <label class="font-bold" for="">Tên sân: </label>
+                    <input class="border-2" name="tensan" type="text" placeholder="Nhập tên sân">
+                    <label class="font-bold" for="">Loại sân: </label>
+                    <select class="border-2" name="loaisan" id="" class="form-select">
 
-                    <option value="Sân 5">Sân 5</option>
-                    <option value="Sân 7">Sân 7</option>
-                </select>
-                <input type="hidden" name="idsancha" value="{{ $data->id }}">
-                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit"
-                    class="btn btn-infor">Thêm mới</button>
-                @csrf
-            </form>
+                        <option value="Sân 5">Sân 5</option>
+                        <option value="Sân 7">Sân 7</option>
+                    </select>
+                    <input type="hidden" name="idsancha" value="{{ $data->id }}">
+                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                        type="submit" class="btn btn-infor">Thêm mới</button>
+                    @csrf
+                </form>
+            </div>
+            </p>
         </div>
-        </p>
-    </div>
 
-    <!-- form dat san  -->
+        <!-- form dat san  -->
 
-    <div class="form-thong-tin ml-5 flex justify-center items-center h-full mb-12 ">
-        <div class="w-full max-w-screen-lg">
-            <div class="grid grid-cols-2 gap-4 bg-b">
-                <!-- Phần 1 chiếm 1/2 san 5-->
-                <div class="col-span-1 w-full h-96 ">
-                    <div class="border-2 rounded-xl ">
-                        <!-- loai san 5  -->
-                        <div class="w-full mx-auto rounded-xl overflow-auto">
-                            <p
-                                class="mx-auto justify-center items-center flex bg-green-300 border-2 font-bold rounded-xl">
-                                SÂN 5</p>
-                            <table class="w-full">
-                                @if (session()->has('san5'))
-                                    <?php $san5 = session('san5'); ?>
-                                    <thead>
-                                        <tr>
-                                            <th class="border-2">STT</th>
-                                            <th class="border-2">Tên sân</th>
-                                            <th class="border-2">Loại sân</th>
-                                            <th class="border-2">Thao tác</th>
-                                        </tr>
+        <div class="form-thong-tin ml-5 flex justify-center items-center h-full mb-12 ">
+            <div class="w-full max-w-screen-lg">
+                <div class="grid grid-cols-2 gap-4 bg-b">
+                    <!-- Phần 1 chiếm 1/2 san 5-->
+                    <div class="col-span-1 w-full h-96 ">
+                        <div class="border-2 rounded-xl ">
+                            <!-- loai san 5  -->
+                            <div class="w-full mx-auto rounded-xl overflow-auto">
+                                <p
+                                    class="mx-auto justify-center items-center flex bg-green-300 border-2 font-bold rounded-xl">
+                                    SÂN 5</p>
+                                <table class="w-full">
+                                    @if (session()->has('san5'))
+                                        <?php $san5 = session('san5'); ?>
+                                        <thead>
+                                            <tr>
+                                                <th class="border-2">STT</th>
+                                                <th class="border-2">Tên sân</th>
+                                                <th class="border-2">Loại sân</th>
+                                                <th class="border-2">Thao tác</th>
+                                            </tr>
+                                        </thead>
+                                        @php $i=1; @endphp
+                                        <tbody>
+                                            @foreach ($san5 as $key)
+                                                <tr class="text-center">
+                                                    <td class="border-2">{{ $i++ }}</td>
+                                                    <td class="border-2">{{ $key->tensan }}</td>
+                                                    <td class="border-2">{{ $key->loaisan }}</td>
+                                                    <td class="border-2 mb-4">
+                                                        <form action="{{ route('sanbong.destroy') }}" method="POST">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <input type="hidden" name="id"
+                                                                value="{{ $key->id }}">
+                                                            <button type="submit"
+                                                                class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                                                                <i class="fa-solid fa-xmark"></i>
+                                                            </button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    @endif
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- Phần 2 chiếm 1/2 san 7-->
+                    <div class="col-span-1 w-full h-96 rounded-xl">
+                        <div class="border-2 container flex flex-col rounded-xl overflow-auto">
+                            <!-- San 7 -->
+                            <div class="w-full mx-auto rounded-xl">
+                                <p class="text-center bg-green-300 border-2 font-bold  rounded-xl">SÂN 7</p>
+                                <table class="rounded-xl w-full">
+                                    <thead class="-2">
+                                        @if (session()->has('san7'))
+                                            <?php $san7 = session('san7'); ?>
+                                            <tr class="border-2 ">
+                                                <th class="border-2">STT</th>
+                                                <th class="border-2">Tên sân</th>
+                                                <th class="border-2">Loại sân</th>
+                                                <th class="border-2">Thao tác</th>
+                                            </tr>
                                     </thead>
-                                    @php $i=1; @endphp
-                                    <tbody>
-                                        @foreach ($san5 as $key)
-                                            <tr class="text-center">
+                                    <tbody class="border-2 text-center">
+                                        @php $i=1; @endphp
+                                        @foreach ($san7 as $key)
+                                            <tr class="border-2 ">
                                                 <td class="border-2">{{ $i++ }}</td>
                                                 <td class="border-2">{{ $key->tensan }}</td>
                                                 <td class="border-2">{{ $key->loaisan }}</td>
-                                                <td class="border-2 mb-4">
+                                                <td class="justify-center items-center flex">
                                                     <form action="{{ route('sanbong.destroy') }}" method="POST">
                                                         @csrf
                                                         @method('DELETE')
                                                         <input type="hidden" name="id"
                                                             value="{{ $key->id }}">
-                                                        <button type="submit"
-                                                            class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
-                                                            <i class="fa-solid fa-xmark"></i>
-                                                        </button>
+                                                        <button
+                                                            class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded text-center"
+                                                            type="submit"><i class="fa-solid fa-xmark"></i></button>
                                                     </form>
                                                 </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
-                                @endif
-                            </table>
-                        </div>
-
-                    </div>
-                </div>
-                <!-- Phần 2 chiếm 1/2 san 7-->
-                <div class="col-span-1 w-full h-96 rounded-xl">
-                    <div class="border-2 container flex flex-col rounded-xl overflow-auto">
-                        <!-- San 7 -->
-                        <div class="w-full mx-auto rounded-xl">
-                            <p class="text-center bg-green-300 border-2 font-bold  rounded-xl">SÂN 7</p>
-                            <table class="rounded-xl w-full">
-                                <thead class="-2">
-                                    @if (session()->has('san7'))
-                                        <?php $san7 = session('san7'); ?>
-                                        <tr class="border-2 ">
-                                            <th class="border-2">STT</th>
-                                            <th class="border-2">Tên sân</th>
-                                            <th class="border-2">Loại sân</th>
-                                            <th class="border-2">Thao tác</th>
-                                        </tr>
-                                </thead>
-                                <tbody class="border-2 text-center">
-                                    @php $i=1; @endphp
-                                    @foreach ($san7 as $key)
-                                        <tr class="border-2 ">
-                                            <td class="border-2">{{ $i++ }}</td>
-                                            <td class="border-2">{{ $key->tensan }}</td>
-                                            <td class="border-2">{{ $key->loaisan }}</td>
-                                            <td class="justify-center items-center flex">
-                                                <form action="{{ route('sanbong.destroy') }}" method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <input type="hidden" name="id"
-                                                        value="{{ $key->id }}">
-                                                    <button
-                                                        class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded text-center"
-                                                        type="submit"><i class="fa-solid fa-xmark"></i></button>
-                                                </form>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                                @endif
-                            </table>
+                                    @endif
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     </div>
     <!-- bang gia va them bang gia san 5  -->
     <div class="border-2 rounded-xl mx-auto w-8/12 ">

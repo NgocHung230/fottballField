@@ -74,6 +74,51 @@ class UserController extends Controller
         return view('user/thongbao',['data'=>$data]);
     }
 
+    public function thongbaoPost(Request $request)
+    {
+        $DS = new DatSan();
+        $DS->deleteDatsanById([$request->iddatsan]);
+        $thongbao = new ThongBao();
+        date_default_timezone_set('Asia/Ho_Chi_Minh');
+        $currentDateTime = date('Y-m-d H:i:s');
+        $thongbao->updateThongBaoById([$currentDateTime,$request->id]);
+
+        $ngay = explode('-',$request->ngay);
+        $dataCheck = [
+            $request->idsancha,
+            $ngay[0],
+            $ngay[1],
+            $ngay[2]
+        ];
+        $TK = new ThongKe();
+        $check = $TK->getThongKeByIdSanCha($dataCheck);
+        $tmp = $check[0]->doanhso;
+        $doanhso = (int)$tmp - (int)$request->giatien;
+        $dataUpdate = [
+            $doanhso,
+            $request->idsancha,
+            $ngay[0],
+            $ngay[1],
+            $ngay[2]
+        ];
+        $TK->updateThongKe($dataUpdate);
+        
+        $user = Auth::guard('users')->user();
+        $dataUpdateUser = [
+            $user->acount + $request->giatien,
+            $user->id
+        ];
+        $US = new User();
+        $US->updateAcountById($dataUpdateUser);
+        $user2 = $US->getUserByIdSancha([$request->idsancha])[0];
+        $dataUpdateUser2 = [
+            $user2->acount -$request->giatien,
+            $user2->id
+        ];
+        $US->updateAcountById($dataUpdateUser2);
+        return redirect()->route('user.thongbao');
+    }
+
     public function profile()
     {
         return view('user/profile');

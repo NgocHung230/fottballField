@@ -76,13 +76,18 @@
             </div>
         </div>
         @if (Auth::guard('users')->check())
-            <div class="dangnhap">
+        <div class="flex-col ">
+            <div class="dangnhap h-8">
                 <p>Xin chào {{ Auth::guard('users')->user()->hoten }}</p>
                 <a href="{{route('logout')}}">
                     <i class="fa-sharp fa-solid fa-right-from-bracket"></i>
                 </a>
-                
             </div>
+            <div class="text-center text-white text-xl ">
+                <p>{{ Auth::guard('users')->user()->acount }}$</p>
+
+            </div>
+        </div>
         @else
         <div class="user">
             <div class="avatar ml-5">

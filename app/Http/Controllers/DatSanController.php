@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\DatSan;
 use App\Models\ThongBao;
 use App\Models\ThongKe;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DatSanController extends Controller
 {
@@ -22,6 +24,9 @@ class DatSanController extends Controller
      */
     public function create(Request $request)
     {
+        // dd( $request->khunggio);
+           
+        $gt= $request->giatien;
         $datsan = new DatSan();
         $dataInsert = [
             $request->idsancon,
@@ -32,9 +37,11 @@ class DatSanController extends Controller
             $request->idsancha
         ];
         $ds = $datsan->createDatSan($dataInsert);
-
+        date_default_timezone_set('Asia/Ho_Chi_Minh');
+        $currentDateTime = date('Y-m-d H:i:s');
+        // echo "Thời gian hiện tại ở Việt Nam là: " . $currentDateTime;
         $thongbao = new ThongBao();
-        $thongbao->createThongBao([$request->idsancha,$request->iduser,$ds[0]->id,now()]);
+        $thongbao->createThongBao([$request->idsancha,$request->iduser,$ds[0]->id,$currentDateTime]);
         $ngay = explode('-',$request->ngay);
         $dataCheck = [
             $request->idsancha,
@@ -67,8 +74,23 @@ class DatSanController extends Controller
             ];
             $TK->addThongKe($dataInsert);
         }
-        
-        return redirect()->route('user.datsan',['id'=>$request->idsancha,'day'=>$request->ngay]);
+        $user = Auth::guard('users')->user();
+        $dataUpdateUser = [
+            $user->acount - $gt,
+            $user->id
+        ];
+        $US = new User();
+        $US->updateAcountById($dataUpdateUser);
+        $user2 = $US->getUserByIdSancha([$request->idsancha])[0];
+        $dataUpdateUser2 = [
+            $user2->acount + $gt,
+            $user2->id
+        ];
+        $US->updateAcountById($dataUpdateUser2);
+
+        if ($user->role=='user') return redirect()->route('user.datsan',['id'=>$request->idsancha,'day'=>$request->ngay]);
+        if ($user->role=='admin') return redirect()->route('admin.datsan',['id'=>$request->idsancha,'day'=>$request->ngay]);
+        if ($user->role=='client') return redirect()->route('client.datsan',['id'=>$request->idsancha,'day'=>$request->ngay]);
     }
 
     /**

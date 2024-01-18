@@ -20,6 +20,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 
     <!-- Link ảnh -->
     <link rel="stylesheet" href="./img">
@@ -64,13 +65,18 @@
             </div>
         </div>
         @if (Auth::guard('users')->check())
-            <div class="dangnhap">
+        <div class="flex-col ">
+            <div class="dangnhap h-8">
                 <p>Xin chào {{ Auth::guard('users')->user()->hoten }}</p>
                 <a href="{{route('logout')}}">
                     <i class="fa-sharp fa-solid fa-right-from-bracket"></i>
                 </a>
-                
             </div>
+            <div class="text-center text-white text-xl ">
+                <p>{{ Auth::guard('users')->user()->acount }}$</p>
+
+            </div>
+        </div>
         @else
         <div class="user">
             <div class="avatar ml-5">
@@ -128,7 +134,10 @@
                             <a href="{{ route('user.datsan', ['id' => $key->id, 'day' => date('d-m-Y')]) }}" name="id"><div class="btn btn-success">Đặt ngay</div></a>
                     </div>
                     <div class="col-sm-5">
-                        <img src="https://placehold.jp/500.png" alt="" width="100%">
+                        @if (!empty($key->img))
+                        <img src="{{$key->img}}" alt="" width="100%">
+                            
+                        @endif
                     </div>
                 </div>
                 <hr>
@@ -151,7 +160,7 @@
     <footer>
         <div class="contact">
             <h2>Thông tin liên hệ</h2>
-            <p>Địa chỉ: 236 Bùi Huy Bích, Nại Hiên Đông, Sơn Trà, Đà Nẵng </p>
+            <p>Địa chỉ: Bùi Huy Bích, Nại Hiên Đông, Sơn Trà, Đà Nẵng </p>
             <p>Điện thoại: 0368037472 </p>
             <p>Email: ngochungnguyen2000dhktyddn@gmail.com</p>
         </div>

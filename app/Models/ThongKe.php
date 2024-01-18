@@ -40,7 +40,7 @@ class ThongKe extends Model
 
     public function getThongKeThangHienTai($data)
     {
-        return DB::select('SELECT SUM(doanhso) AS doanhso,thang FROM thong_kes WHERE idsancha = ? AND thang = ? AND nam = ? and ngay<=? GROUP BY thang', $data);
+        return DB::select('SELECT SUM(doanhso) AS doanhso,thang FROM thong_kes WHERE idsancha = ? AND nam = ? and( thang < ? or((ngay<=?)and thang=?)) GROUP BY thang', $data);
     }
 
     public function getThongKeNgay($data)

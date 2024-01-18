@@ -140,7 +140,10 @@
                             <a href="{{ route('admin.datsan', ['id' => $key->id, 'day' => date('d-m-Y')]) }}" name="id"><div class="btn btn-success">Đặt ngay</div></a>
                     </div>
                     <div class="col-sm-5">
-                        <img src="https://placehold.jp/500.png" alt="" width="100%">
+                        @if (!empty($key->img))
+                        <img src="{{$key->img}}" alt="" width="100%">
+                            
+                        @endif
                     </div>
                 </div>
                 <hr>
@@ -163,7 +166,7 @@
     <footer>
         <div class="contact">
             <h2>Thông tin liên hệ</h2>
-            <p>Địa chỉ: 236 Bùi Huy Bích, Nại Hiên Đông, Sơn Trà, Đà Nẵng </p>
+            <p>Địa chỉ: Bùi Huy Bích, Nại Hiên Đông, Sơn Trà, Đà Nẵng </p>
             <p>Điện thoại: 0368037472 </p>
             <p>Email: ngochungnguyen2000dhktyddn@gmail.com</p>
         </div>

@@ -95,22 +95,39 @@
         @endif
 
         <p>Đây là User ThongBao</p>
-        <div class="text-center font-bold text-3xl">
+        <div class="text-center font-bold text-3xl"
             THÔNG BÁO
             <i class="fa-solid fa-bullhorn"></i>
         </div>
+        
         <div class="w-8/12 mx-auto">
             @foreach ($data as $key)
                 <div>
-                    <div class="  mt-4 bg-blue-100 border border-blue-400 text-blue-700 px-4 py-2 rounded-md">
-                        <i class="fa-solid fa-bullhorn"></i>
+                    @if ($key->updated_at == null)
+                        
 
-                        {{$key->hoten}} ({{$key->email}}) đã đặt sân thành công {{ $key->tensancon }} - {{ $key->loaisan }} tại sân bóng
-                        {{ $key->tensancha }},
-                        địa chỉ {{ $key->diachi }} vào {{ $key->khunggio }}h-{{ $key->khunggio + 1 }}h ngày
-                        {{ $key->ngay }} với giá tiền {{ $key->giatien }}$.
+                        <div class="  mt-4 bg-blue-100 border border-blue-400 text-blue-700 px-4 py-2 rounded-md">
+                            <i class="fa-solid fa-bullhorn"></i>
 
-                    </div>
+                            {{$key->hoten}} ({{$key->email}}) đã đặt sân thành công {{ $key->tensancon }} - {{ $key->loaisan }} tại sân bóng
+                            {{ $key->tensancha }},
+                            địa chỉ {{ $key->diachi }} vào {{ $key->khunggio }}h-{{ $key->khunggio + 1 }}h ngày
+                            {{ $key->ngay }} với giá tiền {{ $key->giatien }}$.
+                            
+                            
+                        </div>
+                        <label for="">{{$key->created_at}}</label>
+                    @else
+                        <div class="  mt-4 bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded-md">
+                            <i class="fa-solid fa-bullhorn"></i>
+
+                            {{$key->hoten}} ({{$key->email}}) đã huỷ sân !!
+                            
+                            
+                        </div>
+                        <label for="">{{$key->updated_at}}</label>
+                    @endif
+                    
 
                 </div>
             @endforeach

@@ -47,7 +47,16 @@ class User extends Authenticatable
         DB::update('UPDATE users SET hoten = ? , email = ? , role = ? where id = ?', $data);
     }
 
+    public function updateAcountById($data){
+        DB::update('UPDATE users SET acount = ?  where id = ?', $data);
+    }
+
+
     public function updatePass($data){
         DB::update('UPDATE users SET password = ?  where id = ?', $data);
+    }
+
+    public function getUserByIdSancha($data){
+        return DB::select('SELECT users.* FROM users join san_chas on users.id=san_chas.quanly WHERE san_chas.id = ?',$data);
     }
 }

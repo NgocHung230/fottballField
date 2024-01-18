@@ -30,7 +30,7 @@
         
         <nav class="navbar navbar-expand-sm navbar-dark fixed-top">
             <div class="mr-10">
-                <img src="./img/logo.jpg" alt="">
+                <img src="/img/logo.jpg" alt="">
     
             </div>
             <div class="collapse navbar-collapse " id="collapsibleNavId">
@@ -50,13 +50,18 @@
                 </div>
             </div>
             @if (Auth::guard('users')->check())
-                <div class="dangnhap">
+            <div class="flex-col ">
+                <div class="dangnhap h-8">
                     <p>Xin chào {{ Auth::guard('users')->user()->hoten }}</p>
                     <a href="{{route('logout')}}">
                         <i class="fa-sharp fa-solid fa-right-from-bracket"></i>
                     </a>
-                    
                 </div>
+                <div class="text-center text-white text-xl ">
+                    <p>{{ Auth::guard('users')->user()->acount }}$</p>
+    
+                </div>
+            </div>
             @else
             <div class="user">
                 <div class="avatar ml-5">
@@ -243,20 +248,42 @@
                                     @endif
                                 @endforeach
                                 @if ($kt == 0)
-                                    <td class="border-2 border-black p-2 text-center bg-green-200">
-                                        <div class="text-black mx-auto"> {{ $key->giatien }} $</div>
-                                        <form action="{{ route('datsan.create') }}" method="POST">
-                                            <input type="hidden" name="idsancon" value="{{ $keysan->id }}">
-                                            <input type="hidden" name="iduser"
-                                                value="{{ Auth::guard('users')->user()->id }}">
-                                            <input type="hidden" name="khunggio" value="{{ $key->khunggio }}">
-                                            <input type="hidden" name="ngay" value="{{ $day }}">
-                                            <input type="hidden" name="giatien" value="{{ $key->giatien }}">
-                                            <input type="hidden" name="idsancha" value="{{ $data->id }}">
-                                            <button type="submit" class="bg-blue-500 text-white p-2 rounded">Đặt
-                                                sân</button>
-                                            @csrf
-                                        </form>
+                                @if ($key->giatien > Auth::guard('users')->user()->acount)
+                                <td
+                                    class="border-2 border-black p-2 text-center bg-green-200 ">
+                                    <div class="text-black mx-auto"> {{ $key->giatien }} $
+                                    </div>
+                                    <button type="submit"
+                                        class="bg-blue-200 text-white p-2 rounded pointer-events-none select-none">Đặt
+                                        sân</button>
+                                    <div style="color: red">
+                                        Bạn không đủ tiền!!
+                                    </div>
+                                @else
+                                <td class="border-2 border-black p-2 text-center bg-green-200">
+                                    <form action="{{ route('datsan.create') }}"
+                                        method="POST">
+                                        <div class="text-black mx-auto"> {{ $key->giatien }} $
+                                        </div>
+
+                                        <input type="hidden" name="idsancon"
+                                            value="{{ $keysan->id }}">
+                                        <input type="hidden" name="iduser"
+                                            value="{{ Auth::guard('users')->user()->id }}">
+                                        <input type="hidden" name="khunggio"
+                                            value="{{ $key->khunggio }}">
+                                        <input type="hidden" name="ngay"
+                                            value="{{ $day }}">
+                                        <input type="hidden" name="giatien"
+                                            value="{{ $key->giatien }}">
+                                        <input type="hidden" name="idsancha"
+                                            value="{{ $data->id }}">
+                                        <button type="submit"
+                                            class="bg-blue-500 text-white p-2 rounded">Đặt
+                                            sân</button>
+                                        @csrf
+                                    </form>
+                            @endif
                                 @endif
                                 </td>
                             @endforeach
@@ -304,21 +331,42 @@
                                     @endif
                                 @endforeach
                                 @if ($kt == 0)
-                                    <td class="border-2 border-black p-2 text-center bg-green-200">
-                                        <form action="{{ route('datsan.create') }}" method="POST">
-                                            <div class="text-black mx-auto"> {{ $key->giatien }} $</div>
-    
-                                            <input type="hidden" name="idsancon" value="{{ $keysan->id }}">
-                                            <input type="hidden" name="iduser"
-                                                value="{{ Auth::guard('users')->user()->id }}">
-                                            <input type="hidden" name="khunggio" value="{{ $key->khunggio }}">
-                                            <input type="hidden" name="ngay" value="{{ $day }}">
-                                            <input type="hidden" name="giatien" value="{{ $key->giatien }}">
-                                            <input type="hidden" name="idsancha" value="{{ $data->id }}">
-                                            <button type="submit" class="bg-blue-500 text-white p-2 rounded">Đặt
-                                                sân</button>
-                                            @csrf
-                                        </form>
+                                @if ($key->giatien > Auth::guard('users')->user()->acount)
+                                <td
+                                    class="border-2 border-black p-2 text-center bg-green-200 ">
+                                    <div class="text-black mx-auto"> {{ $key->giatien }} $
+                                    </div>
+                                    <button type="submit"
+                                        class="bg-blue-200 text-white p-2 rounded pointer-events-none select-none">Đặt
+                                        sân</button>
+                                    <div style="color: red">
+                                        Bạn không đủ tiền!!
+                                    </div>
+                                @else
+                                <td class="border-2 border-black p-2 text-center bg-green-200">
+                                    <form action="{{ route('datsan.create') }}"
+                                        method="POST">
+                                        <div class="text-black mx-auto"> {{ $key->giatien }} $
+                                        </div>
+
+                                        <input type="hidden" name="idsancon"
+                                            value="{{ $keysan->id }}">
+                                        <input type="hidden" name="iduser"
+                                            value="{{ Auth::guard('users')->user()->id }}">
+                                        <input type="hidden" name="khunggio"
+                                            value="{{ $key->khunggio }}">
+                                        <input type="hidden" name="ngay"
+                                            value="{{ $day }}">
+                                        <input type="hidden" name="giatien"
+                                            value="{{ $key->giatien }}">
+                                        <input type="hidden" name="idsancha"
+                                            value="{{ $data->id }}">
+                                        <button type="submit"
+                                            class="bg-blue-500 text-white p-2 rounded">Đặt
+                                            sân</button>
+                                        @csrf
+                                    </form>
+                            @endif
                                 @endif
                                 </td>
                             @endforeach

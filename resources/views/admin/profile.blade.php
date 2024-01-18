@@ -170,11 +170,12 @@
         function update() {
             var hoten = document.getElementById("hoten").value;
             
-
+            
             var errorMessages = [];
 
             if (hoten.trim() === '') {
                 errorMessages.push("Vui lòng nhập họ tên");
+                console.log("lỗi");
             }
 
             if (errorMessages.length > 0) {
@@ -250,7 +251,6 @@
             var errorMessages = [];
             
 
-            var pass = '<?php echo $data->password; ?>';
 
             if (pw.trim() === '') {
                 errorMessages.push("Vui lòng nhập mật khẩu cũ");
